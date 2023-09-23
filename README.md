@@ -46,3 +46,29 @@ We can access the FTP port with `FTP <machine_ip>`. Off the bat it queries us fo
 ![image](https://github.com/silverscripter1/Ghizer-CTF/assets/92340426/75656f6b-3c1e-4bf7-bba0-24b8fed86dd0)
 
 We change to pub and there is 2 files, an image and a secret directory called ".jokesonyou" We can download these to our machine using `mget *`
+
+Change to .jokesonyou and there is another file called hellon3rd.txt and download this to our machine.
+
+There is no hidden details in the image we downloaded and the other file doesnt contain much important information. It says "All you need is in the leet" ??? lol
+
+# SMB ports
+
+![image](https://github.com/silverscripter1/Ghizer-CTF/assets/92340426/9645c20f-d546-4323-96f4-3dd617ed9479)
+
+We can check what we can access via SMB by the command `smbmap -H <machine_ip>`. $Print and $IPC are standard and cant be accessed but "nerdherd_classified" can be by using `smbclient //<machine_ip/nerdherd_classified>`
+
+![image](https://github.com/silverscripter1/Ghizer-CTF/assets/92340426/8394ebb2-086c-4432-bbba-12fccbbb137a)
+
+
+Looks like we're outta luck on SMB, lets go to port 1337 http 
+
+# Webserver
+
+![image](https://github.com/silverscripter1/Ghizer-CTF/assets/92340426/c38d54ca-b13c-477c-ae57-dfa95af3db25)
+
+![image](https://github.com/silverscripter1/Ghizer-CTF/assets/92340426/75bc217f-150b-4c74-af56-072c65220e81)
+
+We get a javascript alert saying the site was hacked, but turns out its a joke by the server admin it seems, we're also told there is something in the webserver we can find, at the bottom of the page there is a link to a youtube video
+
+
+
