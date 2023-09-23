@@ -68,7 +68,19 @@ Looks like we're outta luck on SMB, lets go to port 1337 http
 
 ![image](https://github.com/silverscripter1/Ghizer-CTF/assets/92340426/75bc217f-150b-4c74-af56-072c65220e81)
 
-We get a javascript alert saying the site was hacked, but turns out its a joke by the server admin it seems, we're also told there is something in the webserver we can find, at the bottom of the page there is a link to a youtube video
+We get a javascript alert saying the site was hacked, but turns out its a joke by the server admin it seems, we're also told there is something in the webserver we can find, at the bottom of the page there is a link to a youtube video but it doesnt mean much as it is just a link to The Trashmen - Surfin Bird - Bird is the Word, a song
 
+We should now try to use subdirectory enumeration, trying to find other pages that could contain sensitive info
 
+`gobuster dir -u http://<machine_ip>:1337 -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x txt php `
+
+![image](https://github.com/silverscripter1/Ghizer-CTF/assets/92340426/a0390963-8c5c-4323-9a1a-03a79381520d)
+
+We find a secret subdomain of "/admin"
+
+![image](https://github.com/silverscripter1/Ghizer-CTF/assets/92340426/fa3ec724-fa56-497c-8ac4-97da71b42aa2)
+
+We check the source code and there is a base64 encoded username and password, we can decode it with https://gchq.github.io/CyberChef/ which is my go to decryption website.
+
+The password contains weird characters when unecrypted though, and trying these on the website doesnt let us in
 
