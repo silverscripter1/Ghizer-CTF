@@ -82,5 +82,35 @@ We find a secret subdomain of "/admin"
 
 We check the source code and there is a base64 encoded username and password, we can decode it with https://gchq.github.io/CyberChef/ which is my go to decryption website.
 
-The password contains weird characters when unecrypted though, and trying these on the website doesnt let us in
+The password contains weird characters when unecrypted though, and trying these on the website doesnt let us in.
+
+# Roadblock?
+
+Remember the ftp port?, the image we found, if you dont know already data can be hidden inside images, and in kali linux there is many tools to extract this data
+
+`exiftool <image_name>`
+
+We see that the owner of the image is "fijbxslz", and the youtube link in the apache page earlier says "bird is the word"
+
+This might be pointing to a vigenere cipher, which we can also use on cyberchef,
+
+We now have a password, which im assuming is for SMB, now all we need is a username, which we can find out using "enum4linux"
+
+![image](https://github.com/silverscripter1/NerdHerd-CTF/assets/92340426/10b3b0a1-1a9e-4dc7-aadb-a7e456c4f78c)
+
+## SMB
+
+On the smb shares, there is one file called "secr3t.txt" and it says their is a secret directory, on this directory on the webpage, their is creds for the SSH port, we now have access to the machine
+
+### SSH AND PRIVELLEGE ESCELATION
+
+On login, we have our 1st flag, the user.txt flag.
+
+Theres no other way I've found to find a privellege escalation vulnerabilty other than using linpeas, which we can download to the machine using a python webserver and wget.
+
+It says the kernel version is very outdated and there is a CVE that allows us to be root, here is the link https://www.exploit-db.com/exploits/45010
+
+The rest of the flags are in /opt and in the /root directory in the bash history.
+
+Happy hacking!
 
